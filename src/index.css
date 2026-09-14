@@ -1,0 +1,38 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Lora", serif;
+  --font-sans: "Inter", sans-serif;
+
+  --color-paper: #FBF9F4;
+  --color-ink: #1F2421;
+  --color-surface: #F3EEE3;
+  --color-border: #DDD5C3;
+  --color-accent: #2E4A3D;
+  --color-accent-hover: #24392F;
+  --color-highlight: #E8B94E;
+}
+
+body {
+  font-family: var(--font-sans);
+}
+
+/* Indicador de foco consistente em todo o app — só aparece pra navegação
+   via teclado (:focus-visible), não em cada clique de mouse */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Respeita a preferência do sistema por menos animação — desativa
+   qualquer transição/animação do app inteiro de uma vez só */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
