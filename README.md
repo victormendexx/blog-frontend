@@ -1,75 +1,29 @@
-# React + TypeScript + Vite
+# Mural — Front-end (Tech Challenge Fase 3)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![CI/CD](https://github.com/victormendexx/blog-frontend/actions/workflows/ci-cd.yml/badge.svg)
 
-Currently, two official plugins are available:
+Interface React para a plataforma de blogging educacional **Mural**, consumindo a API REST
+desenvolvida na Fase 2 ([blog-api](https://github.com/victormendexx/blog-api)). Permite que
+alunos leiam e busquem posts publicamente, e que professores autenticados criem, editem e
+excluam conteúdo.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Sumário
 
-## React Compiler
+- [Sobre o projeto](#sobre-o-projeto)
+- [Arquitetura](#arquitetura)
+- [Tecnologias utilizadas](#tecnologias-utilizadas)
+- [Estrutura de pastas](#estrutura-de-pastas)
+- [Como rodar localmente](#como-rodar-localmente)
+- [Como rodar com Docker](#como-rodar-com-docker)
+- [Variáveis de ambiente](#variáveis-de-ambiente)
+- [Guia de uso](#guia-de-uso)
+- [CI/CD](#cicd)
+- [Desafios e aprendizados](#desafios-e-aprendizados)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Sobre o projeto
 
-## Expanding the ESLint configuration
+Este repositório contém **apenas o front-end**. Ele depende da API REST do repositório
+[`blog-api`](https://github.com/victormendexx/blog-api) estar em execução — local ou publicada
+— para funcionar por completo.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
-```
-
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
-```
+## Arquitetura
