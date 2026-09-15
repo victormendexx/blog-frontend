@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
+import { createContext, useContext, useState, type ReactNode } from 'react';
 import type { Teacher } from '../types';
 import * as authService from '../services/authService';
 
@@ -15,21 +15,24 @@ interface AuthContextValue {
 
 const AuthContext = createContext<AuthContextValue | undefined>(undefined);
 
-export function AuthProvider({ children }: { children: ReactNode }) {
-  const [teacher, setTeacher] = useState<Teacher | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-
-  // Restaura a sessão do localStorage ao carregar a página
-  useEffect(() => {
+function readStoredTeacher(): Teacher | null {
+  try {
     const storedTeacher = localStorage.getItem(TEACHER_KEY);
     const storedToken = localStorage.getItem(TOKEN_KEY);
 
-    if (storedTeacher && storedToken) {
-      setTeacher(JSON.parse(storedTeacher));
+    if (!storedTeacher || !storedToken) {
+      return null;
     }
 
-    setIsLoading(false);
-  }, []);
+    return JSON.parse(storedTeacher) as Teacher;
+  } catch {
+    return null;
+  }
+}
+
+export function AuthProvider({ children }: { children: ReactNode }) {
+  const [teacher, setTeacher] = useState<Teacher | null>(() => readStoredTeacher());
+  const isLoading = false;
 
   async function login(email: string, password: string): Promise<void> {
     const result = await authService.login(email, password);
@@ -53,6 +56,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   );
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function useAuth(): AuthContextValue {
   const context = useContext(AuthContext);
 

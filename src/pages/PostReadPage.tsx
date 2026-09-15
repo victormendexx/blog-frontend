@@ -14,6 +14,7 @@ export default function PostReadPage() {
   useEffect(() => {
     if (!id) return;
 
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsLoading(true);
     postsService
       .getPost(id)

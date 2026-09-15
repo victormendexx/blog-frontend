@@ -11,10 +11,6 @@ export default function AdminPage() {
   const [error, setError] = useState<string | null>(null);
   const [deletingId, setDeletingId] = useState<string | null>(null);
 
-  useEffect(() => {
-    load();
-  }, []);
-
   function load(): void {
     setIsLoading(true);
     setError(null);
@@ -26,6 +22,11 @@ export default function AdminPage() {
       )
       .finally(() => setIsLoading(false));
   }
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    load();
+  }, []);
 
   async function handleDelete(post: Post): Promise<void> {
     const confirmed = window.confirm(
